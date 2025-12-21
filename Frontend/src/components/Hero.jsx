@@ -1,109 +1,93 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 
 const Hero = () => {
     return (
-        <section className="relative min-h-screen bg-slate-50 overflow-hidden flex items-center pt-20">
-            {/* Abstract Background Shapes */}
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-blue-100 rounded-full blur-3xl opacity-50 animate-pulse"></div>
-            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-teal-100 rounded-full blur-3xl opacity-50"></div>
+        <section className="relative min-h-screen bg-[#fafaf9] overflow-hidden flex flex-col justify-center pt-32 pb-20">
+            {/* Subtle Gradient Spot */}
+            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-white to-transparent opacity-60"></div>
+            <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-100/30 rounded-full blur-[120px]"></div>
 
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="container mx-auto px-4 relative z-10 text-center">
 
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="max-w-2xl"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="inline-block bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-6"
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="max-w-4xl mx-auto"
+                >
+                    <div className="flex justify-center mb-8">
+                        <span className="bg-white border border-stone-200 text-stone-600 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide shadow-sm flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                            India's Premier Dental Network
+                        </span>
+                    </div>
+
+                    <h1 className="text-6xl md:text-8xl font-bold text-stone-900 leading-[1.05] tracking-tight mb-8">
+                        Big Dental. <br />
+                        <span className="italic text-amber-600 font-medium">Big Smiles.</span>
+                    </h1>
+
+                    <p className="text-xl md:text-2xl text-stone-500 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                        Where world-class expertise meets genuine care.
+                        Join 10 million+ happy smiles across the nation.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-5 justify-center mb-20">
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="bg-stone-900 text-white px-10 py-4 rounded-full font-medium text-lg shadow-2xl hover:bg-stone-800 transition-colors flex items-center justify-center gap-3"
                         >
-                            <span className="text-blue-600 font-semibold text-sm flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
-                                No. 1 Dental Chain in India
-                            </span>
-                        </motion.div>
+                            Book a Consultation <ArrowRight className="w-5 h-5" />
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="bg-white text-stone-800 border border-stone-200 px-10 py-4 rounded-full font-medium text-lg hover:border-amber-200 transition-colors"
+                        >
+                            Find a Clinic Near You
+                        </motion.button>
+                    </div>
+                </motion.div>
 
-                        <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
-                            <span className="block">Big Dental</span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500">
-                                Big Smiles
-                            </span>
-                        </h1>
+                {/* Hero Image / Editorial Banner */}
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                    className="relative max-w-6xl mx-auto"
+                >
+                    <div className="relative rounded-[3rem] overflow-hidden aspect-[21/9] shadow-2xl">
+                        <img
+                            src="http://bigdental.org/wp-content/uploads/2024/05/dental-1.jpg"
+                            alt="Happy Patient"
+                            className="w-full h-full object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-stone-900/10"></div>
 
-                        <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                            Experience world-class dental care with the largest network of clinics across the nation. Affordable, accessible, and premium care for everyone.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 group"
-                            >
-                                Book Consultation <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                            </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-white text-gray-800 border border-gray-200 px-8 py-4 rounded-xl font-bold shadow-sm hover:shadow-md flex items-center justify-center gap-2"
-                            >
-                                Find Clinic
-                            </motion.button>
-                        </div>
-
-                        <div className="flex items-center gap-6 text-sm font-medium text-gray-500">
-                            <div className="flex items-center gap-2">
-                                <CheckCircle className="text-teal-500 w-5 h-5" /> 3000+ Clinics
+                        {/* Floating Badge */}
+                        <div className="absolute bottom-8 left-8 bg-white/95 backdrop-blur px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4">
+                            <div className="flex -space-x-3">
+                                <div className="w-10 h-10 rounded-full bg-stone-200 border-2 border-white"></div>
+                                <div className="w-10 h-10 rounded-full bg-stone-300 border-2 border-white"></div>
+                                <div className="w-10 h-10 rounded-full bg-stone-400 border-2 border-white flex items-center justify-center text-xs font-bold text-stone-700">+2k</div>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <CheckCircle className="text-teal-500 w-5 h-5" /> 10,000+ Doctors
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative"
-                    >
-                        <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                            <img
-                                src="http://bigdental.org/wp-content/uploads/2024/05/dental-1.jpg"
-                                alt="Happy Patient"
-                                className="w-full h-auto object-cover"
-                            />
-                            {/* Floating Card */}
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 1, duration: 0.5 }}
-                                className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/50"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <div className="bg-green-100 p-3 rounded-full">
-                                        <span className="text-2xl">😊</span>
-                                    </div>
-                                    <div>
-                                        <p className="font-bold text-gray-900">98% Satisfaction</p>
-                                        <p className="text-sm text-gray-500">Based on patient reviews</p>
-                                    </div>
+                            <div>
+                                <div className="flex text-amber-500 mb-0.5">
+                                    <Star className="w-4 h-4 fill-current" />
+                                    <Star className="w-4 h-4 fill-current" />
+                                    <Star className="w-4 h-4 fill-current" />
+                                    <Star className="w-4 h-4 fill-current" />
+                                    <Star className="w-4 h-4 fill-current" />
                                 </div>
-                            </motion.div>
+                                <span className="text-xs font-bold text-stone-800 uppercase tracking-widest">Trusted Review</span>
+                            </div>
                         </div>
+                    </div>
+                </motion.div>
 
-                        {/* Decorative Dots */}
-                        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-pattern-dots opacity-20 transform rotate-12"></div>
-                    </motion.div>
-
-                </div>
             </div>
         </section>
     );

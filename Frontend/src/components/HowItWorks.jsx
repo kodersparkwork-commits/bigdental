@@ -12,8 +12,8 @@ const HowItWorks = () => {
         <section className="py-24 bg-white">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">Franchise Model</h2>
-                    <p className="text-xl text-gray-500">How we empower dental professionals</p>
+                    <h2 className="text-4xl md:text-5xl font-bold text-stone-900 mb-4 font-serif">Franchise Model</h2>
+                    <p className="text-xl text-stone-500">How we empower dental professionals</p>
                 </div>
 
                 <div className="flex flex-col-reverse md:flex-row items-center gap-16">
@@ -27,12 +27,12 @@ const HowItWorks = () => {
                                 transition={{ delay: index * 0.2 }}
                                 className="flex gap-6 group"
                             >
-                                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-xl group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
                                     {index + 1}
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                                    <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                                    <h3 className="text-xl font-bold text-stone-900 mb-2 font-serif">{step.title}</h3>
+                                    <p className="text-stone-600 leading-relaxed">{step.desc}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -45,7 +45,7 @@ const HowItWorks = () => {
                         className="md:w-1/2"
                     >
                         <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-transparent rounded-2xl opacity-20 transform translate-x-4 translate-y-4"></div>
+                            <div className="absolute inset-0 bg-gradient-to-tr from-amber-600 to-transparent rounded-2xl opacity-20 transform translate-x-4 translate-y-4"></div>
                             <img
                                 src="http://bigdental.org/wp-content/uploads/2023/11/logo-bg.jpg"
                                 alt="How it works"

@@ -25,20 +25,20 @@ const Treatments = () => {
     };
 
     return (
-        <section className="py-24 bg-slate-50">
+        <section className="py-24 bg-stone-50">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <motion.span
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        className="text-blue-600 font-bold tracking-wider uppercase text-sm"
+                        className="text-amber-600 font-bold tracking-wider uppercase text-sm"
                     >
                         Comprehensive Care
                     </motion.span>
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        className="text-4xl font-bold mt-2 text-gray-900"
+                        className="text-4xl md:text-5xl font-bold mt-2 text-stone-900 font-serif"
                     >
                         Our Treatments
                     </motion.h2>
@@ -49,25 +49,18 @@ const Treatments = () => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-6 max-w-6xl mx-auto"
                 >
                     {treatments.map((treatment, index) => (
-                        <motion.div key={index} variants={item} className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-                            <div className="aspect-[4/3] overflow-hidden">
-                                <img
-                                    src="http://bigdental.org/wp-content/uploads/2023/11/bg-3.jpg"
-                                    alt={treatment}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 transition-opacity duration-300">
-                                <h5 className="text-white font-bold text-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    {treatment}
-                                </h5>
-                                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
-                                    Click to learn more
-                                </p>
-                            </div>
+                        <motion.div
+                            key={index}
+                            variants={item}
+                            className="flex items-center gap-3 group cursor-default"
+                        >
+                            <span className="w-2 h-2 rounded-full bg-amber-400 group-hover:scale-150 transition-transform duration-300"></span>
+                            <span className="text-lg text-stone-700 font-light group-hover:text-stone-900 transition-colors">
+                                {treatment}
+                            </span>
                         </motion.div>
                     ))}
                 </motion.div>

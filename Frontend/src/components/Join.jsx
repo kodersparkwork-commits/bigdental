@@ -12,15 +12,14 @@ const Join = () => {
     ];
 
     return (
-        <section id="franchise" className="py-24 bg-blue-600 text-white relative overflow-hidden">
+        <section id="franchise" className="py-24 bg-gradient-to-br from-amber-50 to-orange-50 text-stone-900 relative overflow-hidden">
             {/* Abstract Background */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-teal-500 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-40 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold mb-4">Join the Network</h2>
-                    <p className="text-blue-100 text-xl max-w-2xl mx-auto">Become a part of India's fastest growing dental chain. Simpler than you think.</p>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4 font-serif text-stone-900">Join the Network</h2>
+                    <p className="text-stone-500 text-xl max-w-2xl mx-auto font-light">Become a part of India's fastest growing dental chain. Simpler than you think.</p>
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-6">
@@ -32,22 +31,22 @@ const Join = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             whileHover={{ y: -10 }}
-                            className="bg-blue-700/50 backdrop-blur-sm border border-blue-500/30 p-6 rounded-2xl w-full md:w-56 text-center hover:bg-blue-700 transition"
+                            className="bg-white border border-stone-100 p-8 rounded-2xl w-full md:w-60 text-center hover:shadow-xl hover:border-amber-200 transition-all duration-300 shadow-sm"
                         >
-                            <div className="w-12 h-12 mx-auto bg-blue-500 rounded-xl flex items-center justify-center mb-4 text-white">
+                            <div className="w-14 h-14 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-6 text-amber-500">
                                 {step.icon}
                             </div>
-                            <h3 className="font-bold text-lg mb-2">{step.title}</h3>
-                            <p className="text-blue-200 text-sm">{step.desc}</p>
+                            <h3 className="font-bold text-lg mb-2 text-stone-900 font-serif">{step.title}</h3>
+                            <p className="text-stone-500 text-sm leading-relaxed">{step.desc}</p>
                         </motion.div>
                     ))}
                 </div>
 
-                <div className="mt-16 text-center">
+                <div className="mt-20 text-center">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-white text-blue-600 px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition"
+                        className="bg-stone-900 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-amber-600 transition-colors"
                     >
                         Apply for Franchise
                     </motion.button>
