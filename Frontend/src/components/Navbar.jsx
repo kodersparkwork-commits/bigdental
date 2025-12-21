@@ -67,7 +67,7 @@ const Navbar = () => {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden text-slate-800 focus:outline-none"
+                        className="md:hidden text-amber-600 focus:outline-none relative z-50"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
                         {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -82,7 +82,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden fixed top-[80px] left-0 right-0 bg-white/95 backdrop-blur-md shadow-xl z-40 border-t border-slate-100 overflow-hidden"
+                        className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-xl z-40 border-t border-slate-100 overflow-hidden"
                     >
                         <div className="flex flex-col p-6 space-y-6">
                             {links.map((link) => (
