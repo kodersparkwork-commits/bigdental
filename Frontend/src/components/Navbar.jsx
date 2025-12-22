@@ -122,7 +122,7 @@ const Navbar = () => {
                                 )
                             ))}
                             <a
-                                href="https://wa.me/919618035653"
+                                href="https://wa.me/919032018887"
                                 className="block w-full text-center bg-sky-600 text-white p-4 rounded-xl font-bold shadow-lg shadow-sky-500/20 mt-4"
                             >
                                 Book Appointment
