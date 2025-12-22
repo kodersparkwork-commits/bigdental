@@ -1,38 +1,68 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const Treatments = () => {
     const treatments = [
         {
-            title: "Cosmetic Dentistry",
-            desc: "Smile makeovers, veneers, and whitening for a radiant smile.",
-            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-3.jpg"
+            title: "Invisible Aligners",
+            desc: "Clear, comfortable aligners to straighten your teeth discreetly.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-5.jpg"
         },
         {
-            title: "Dental Implants",
-            desc: "Permanent, natural-looking solutions for missing teeth.",
-            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-4.jpg"
-        },
-        {
-            title: "Orthodontics",
-            desc: "Straighten your teeth with invisible aligners or traditional braces.",
+            title: "Dental Braces",
+            desc: "Traditional and ceramic braces for effective teeth correction.",
             image: "http://bigdental.org/wp-content/uploads/2024/05/dental-5.jpg"
         },
         {
             title: "Root Canal",
-            desc: "Pain-free root canal treatments to save your natural teeth.",
+            desc: "Advanced therapy to save infected teeth and relieve pain instantly.",
             image: "http://bigdental.org/wp-content/uploads/2024/05/dental-1.jpg"
         },
         {
-            title: "Pediatric Dentistry",
-            desc: "Gentle and fun dental care specifically designed for children.",
+            title: "Wisdom Tooth",
+            desc: "Safe and painless removal of problematic wisdom teeth.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-3.jpg"
+        },
+        {
+            title: "Dentures",
+            desc: "Custom-fitted complete and partial dentures for natural function.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-4.jpg"
+        },
+        {
+            title: "Cosmetic Dentistry",
+            desc: "Comprehensive aesthetic procedures to design your perfect smile.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-3.jpg"
+        },
+        {
+            title: "Teeth Whitening",
+            desc: "Professional whitening treatments for a brighter, dazzling smile.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-3.jpg"
+        },
+        {
+            title: "Dental Implants",
+            desc: "The gold standard for replacing missing teeth permanently.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-4.jpg"
+        },
+        {
+            title: "Dental Veneers",
+            desc: "Thin, custom shells to cover defects and enhance your smile.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-3.jpg"
+        },
+        {
+            title: "TMJ Treatment",
+            desc: "Specialized care for jaw pain and temporomandibular joint disorders.",
             image: "http://bigdental.org/wp-content/uploads/2024/05/dental-2.jpg"
         },
         {
-            title: "Oral Surgery",
-            desc: "Expert surgical care for extractions and complex procedures.",
+            title: "Tooth Extraction",
+            desc: "Gentle extractions when teeth cannot be saved.",
             image: "http://bigdental.org/wp-content/uploads/2024/05/dental-3.jpg"
+        },
+        {
+            title: "Dental Crowns",
+            desc: "Strong, natural-looking caps to restore damaged or decayed teeth.",
+            image: "http://bigdental.org/wp-content/uploads/2024/05/dental-1.jpg"
         }
     ];
 
@@ -54,40 +84,19 @@ const Treatments = () => {
                     </a>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
                     {treatments.map((item, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="group relative bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-500"
+                            transition={{ delay: index * 0.05 }}
+                            className="text-center"
                         >
-                            <div className="h-64 overflow-hidden relative">
-                                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors z-10"></div>
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                                />
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full z-20 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                                    <ArrowRight className="w-5 h-5 text-sky-600" />
-                                </div>
-                            </div>
-
-                            <div className="p-8">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-3 font-heading group-hover:text-sky-600 transition-colors">
-                                    {item.title}
-                                </h3>
-                                <p className="text-slate-600 leading-relaxed text-sm mb-6">
-                                    {item.desc}
-                                </p>
-                                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-sky-600">
-                                    <Star className="w-4 h-4 fill-current" />
-                                    <span>Top Rated Service</span>
-                                </div>
-                            </div>
+                            <h3 className="text-sm sm:text-base md:text-xl font-bold text-slate-700 hover:text-sky-600 transition-colors cursor-pointer">
+                                {item.title}
+                            </h3>
                         </motion.div>
                     ))}
                 </div>

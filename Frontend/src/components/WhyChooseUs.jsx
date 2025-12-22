@@ -1,28 +1,48 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Heart, Clock, Users } from 'lucide-react';
+import { ShieldCheck, Sparkles, Clock, Users, MapPin, Wallet, CreditCard, Banknote } from 'lucide-react';
 
 const WhyChooseUs = () => {
     const features = [
         {
-            icon: <ShieldCheck className="w-8 h-8 text-sky-500" />,
-            title: "Certified Excellence",
-            desc: "Accredited specialists ensuring world-class dental care standards."
+            icon: <Sparkles className="w-8 h-8 text-sky-500" />,
+            title: "Modern practices",
+            desc: "State-of-the-art dental technologies and modern methodologies."
         },
         {
-            icon: <Heart className="w-8 h-8 text-sky-500" />,
-            title: "Pain-Free Treatment",
-            desc: "Advanced techniques ensuring comfort for even the most sensitive patients."
-        },
-        {
-            icon: <Clock className="w-8 h-8 text-sky-500" />,
-            title: "24/7 Emergency",
-            desc: "Round-the-clock availability for urgency dental needs."
+            icon: <MapPin className="w-8 h-8 text-sky-500" />,
+            title: "3000+ Clinics",
+            desc: "A vast network of clinics spread across India for easy access."
         },
         {
             icon: <Users className="w-8 h-8 text-sky-500" />,
-            title: "Patient First",
-            desc: "Personalized care plans tailored to your specific needs and goals."
+            title: "10,000 Doctors",
+            desc: "A massive team of experienced dental professionals."
+        },
+        {
+            icon: <ShieldCheck className="w-8 h-8 text-sky-500" />,
+            title: "Hygienic protocols",
+            desc: "Strict adherence to sterilization and hygiene standards."
+        },
+        {
+            icon: <Wallet className="w-8 h-8 text-sky-500" />,
+            title: "Affordable price",
+            desc: "High quality care at least 40% less than market rates."
+        },
+        {
+            icon: <CreditCard className="w-8 h-8 text-sky-500" />,
+            title: "Flexible Payment",
+            desc: "Easy payment options to suit your financial needs."
+        },
+        {
+            icon: <Banknote className="w-8 h-8 text-sky-500" />,
+            title: "Interest Free Finance",
+            desc: "0% interest financing options for dental procedures."
+        },
+        {
+            icon: <Clock className="w-8 h-8 text-sky-500" />,
+            title: "No waiting period",
+            desc: "Immediate appointments and prompt treatment commencement."
         }
     ];
 

@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Loader from './components/ui/Loader';
 import NotificationProvider from './components/ui/Notification';
 import PageTransition from './components/ui/PageTransition';
+import ScrollToTop from './components/ScrollToTop';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -71,6 +72,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <NotificationProvider>
         <div className="min-h-screen bg-slate-50 font-body text-slate-600 selection:bg-sky-500 selection:text-white">
           <AnimatePresence mode="wait">

@@ -9,7 +9,7 @@ const About = () => {
             {/* 1. Origin Story Section */}
             <section className="py-24 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-50 rounded-full blur-[100px] pointer-events-none"></div>
-                <div className="container mx-auto px-6">
+                <div className="container mx-auto px-6 relative z-10">
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
@@ -21,7 +21,7 @@ const About = () => {
                             <h2 className="text-4xl font-bold text-slate-900 mb-6 font-heading leading-tight">
                                 The Team That Built <br /> <span className="text-sky-600">Big Dental Group</span>
                             </h2>
-                            <div className="space-y-6 text-slate-600 leading-relaxed font-light text-lg">
+                            <div className="space-y-6 text-slate-700 leading-relaxed text-lg">
                                 <p>
                                     The Big Dental Group is a visionary venture associated with the <strong className="text-slate-900 font-medium">Indian Dental Academy</strong>, a renowned provider of continuing dental education for over two decades. With an established track record of excellence and trust within the dental community, the Indian Dental Academy has become a respected and valued name in the field of dentistry.
                                 </p>
@@ -93,10 +93,10 @@ const About = () => {
                         <div className="lg:w-1/2 order-1 lg:order-2">
                             <span className="text-sky-600 font-semibold uppercase tracking-wider text-sm mb-3 block">Our Strength</span>
                             <h2 className="text-4xl font-bold text-slate-900 mb-6 font-heading">Powered by a <br /><span className="text-sky-600">Diverse Force</span></h2>
-                            <p className="text-slate-600 leading-relaxed mb-6 font-light text-lg">
+                            <p className="text-slate-700 leading-relaxed mb-6 text-lg">
                                 The Big Dental Group isn't just a regular company. It's a powerful force changing how dental care works. Being dental professionals ourselves, we understand the pulse of dentistry and are super committed to one big goal: create a platform where small dental clinics can reach new heights.
                             </p>
-                            <p className="text-slate-600 leading-relaxed font-light text-lg">
+                            <p className="text-slate-700 leading-relaxed text-lg">
                                 But there's more to our team. We also have experts in digital marketing, web development, paid marketing, and media. Together, this powerful diverse team serves as the lifeline for your clinic, helping your practice multiply by ten times.
                             </p>
                         </div>
