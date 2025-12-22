@@ -1,73 +1,66 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Star, Shield, CreditCard, Clock, Users } from 'lucide-react';
+import { ShieldCheck, Heart, Clock, Users } from 'lucide-react';
 
 const WhyChooseUs = () => {
-    const benefits = [
-        { title: "Modern Practices", text: "Latest tools & technology", icon: <Star className="w-5 h-5" /> },
-        { title: "3000+ Clinics", text: "Accessible everywhere", icon: <Users className="w-5 h-5" /> },
-        { title: "10,000 Doctors", text: "Expert specialists", icon: <Shield className="w-5 h-5" /> },
-        { title: "Hygiene Protocols", text: "International standards", icon: <Check className="w-5 h-5" /> },
-        { title: "Affordable Price", text: "40% less than market", icon: <CreditCard className="w-5 h-5" /> },
-        { title: "No Waiting Period", text: "Immediate appointments", icon: <Clock className="w-5 h-5" /> },
+    const features = [
+        {
+            icon: <ShieldCheck className="w-8 h-8 text-sky-500" />,
+            title: "Certified Excellence",
+            desc: "Accredited specialists ensuring world-class dental care standards."
+        },
+        {
+            icon: <Heart className="w-8 h-8 text-sky-500" />,
+            title: "Pain-Free Treatment",
+            desc: "Advanced techniques ensuring comfort for even the most sensitive patients."
+        },
+        {
+            icon: <Clock className="w-8 h-8 text-sky-500" />,
+            title: "24/7 Emergency",
+            desc: "Round-the-clock availability for urgency dental needs."
+        },
+        {
+            icon: <Users className="w-8 h-8 text-sky-500" />,
+            title: "Patient First",
+            desc: "Personalized care plans tailored to your specific needs and goals."
+        }
     ];
 
     return (
-        <section className="py-24 bg-white relative">
-            <div className="absolute inset-y-0 right-0 w-1/3 bg-stone-50 skew-x-12 opacity-50 z-0"></div>
+        <section className="py-24 bg-slate-50">
+            <div className="container mx-auto px-6">
+                <div className="text-center mb-16 max-w-2xl mx-auto">
+                    <span className="text-sky-600 font-semibold uppercase tracking-wider text-sm mb-3 block">Why Choose Big Dental</span>
+                    <h2 className="text-4xl font-bold text-slate-900 mb-6 font-heading">
+                        Excellence in Every <span className="text-sky-600">Detail</span>
+                    </h2>
+                    <p className="text-lg text-slate-600 font-light leading-relaxed">
+                        We blend clinical expertise with a warm, welcoming environment to redefine your dental experience.
+                    </p>
+                </div>
 
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="flex flex-col md:flex-row gap-20 items-center">
-
-                    <div className="md:w-1/3">
-                        <motion.h2
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {features.map((feature, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-5xl font-bold mb-8 leading-tight text-stone-900 font-serif"
+                            transition={{ delay: index * 0.1, duration: 0.5 }}
+                            whileHover={{ y: -10 }}
+                            className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-300 group"
                         >
-                            Why India Trusts <br />
-                            <span className="text-amber-600 italic">Big Dental?</span>
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-stone-500 mb-10 text-lg leading-relaxed font-light"
-                        >
-                            We combine affordability with world-class quality to ensure everyone has access to the best dental care.
-                        </motion.p>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-amber-500/30"
-                        >
-                            Book an Appointment
-                        </motion.button>
-                    </div>
-
-                    <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
-                        {benefits.map((benefit, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ x: 10 }}
-                                className="flex items-start gap-5 group"
-                            >
-                                <div className="bg-stone-100 p-3 rounded-xl text-stone-400 group-hover:text-amber-500 group-hover:bg-amber-50 transition-colors duration-300">
-                                    {benefit.icon}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-stone-900 text-lg mb-1 font-serif group-hover:text-amber-600 transition-colors">{benefit.title}</h4>
-                                    <p className="text-stone-500 font-light text-sm">{benefit.text}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
+                            <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:bg-sky-50 transition-colors duration-300">
+                                {feature.icon}
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-3 font-heading group-hover:text-sky-600 transition-colors">
+                                {feature.title}
+                            </h3>
+                            <p className="text-slate-600 leading-relaxed text-sm">
+                                {feature.desc}
+                            </p>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>

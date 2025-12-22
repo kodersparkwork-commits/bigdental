@@ -1,0 +1,71 @@
+﻿
+> bigdental@0.0.0 lint
+> eslint .
+
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\About.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\Features.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\FranchisePage.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\Hero.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\HowItWorks.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\Join.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\Mission.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\Navbar.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\Treatments.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\WhyChooseUs.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\ui\Loader.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\ui\Notification.jsx
+   2:10  error    'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 no-unused-vars
+   7:14  error    Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-refresh/only-export-components
+  15:26  error    Error: Cannot access variable before it is declared
+
+`removeNotification` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  13 |         const id = Date.now();
+  14 |         setNotifications((prev) => [...prev, { id, type, message }]);
+> 15 |         setTimeout(() => removeNotification(id), 5000);
+     |                          ^^^^^^^^^^^^^^^^^^ `removeNotification` accessed before it is declared
+  16 |     }, []);
+  17 |
+  18 |     const removeNotification = useCallback((id) => {
+
+  16 |     }, []);
+  17 |
+> 18 |     const removeNotification = useCallback((id) => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 19 |         setNotifications((prev) => prev.filter((n) => n.id !== id));
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 20 |     }, []);
+     | ^^^^^^^^^^^^ `removeNotification` is declared here
+  21 |
+  22 |     const notify = {
+  23 |         success: (msg) => addNotification('success', msg),  react-hooks/immutability
+  16:8   warning  React Hook useCallback has a missing dependency: 'removeNotification'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/exhaustive-deps
+
+C:\Users\lasya\OneDrive\Desktop\Koder Spark\Bigdental\Frontend\src\components\ui\PageTransition.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+Γ£û 16 problems (15 errors, 1 warning)
+

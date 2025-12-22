@@ -1,31 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
 @import "tailwindcss";
 
-@theme {
-  --font-serif: "Playfair Display", serif;
-}
+@layer base {
+  :root {
+    /* Premium Palette - "Elegance" */
+    --color-primary: #0284C7;
+    /* Sky 700 */
+    --color-primary-light: #38BDF8;
+    /* Sky 400 */
+    --color-secondary: #0F172A;
+    /* Slate 900 */
+    --color-accent: #0EA5E9;
+    /* Sky 500 */
+    --color-bg-light: #F8FAFC;
+    /* Slate 50 */
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f8fafc;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Applying base styles directly or via @apply if recognized */
+  /* If utilities fail, we will rely on className in App.jsx */
 }
 
 ::selection {
-  background-color: #fff7ed;
-  /* Orange-100 */
-  color: #ea580c;
-  /* Orange-600 */
+  @apply bg-sky-500 text-white;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Outfit', sans-serif;
-  letter-spacing: -0.02em;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+/* Utility Animations */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }

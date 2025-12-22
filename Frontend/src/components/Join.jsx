@@ -1,55 +1,82 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ClipboardList, CheckSquare, Map, ShieldCheck, CreditCard } from 'lucide-react';
+import { FileText, UserCheck, ShieldCheck, CreditCard, ArrowRight } from 'lucide-react';
 
 const Join = () => {
     const steps = [
-        { icon: <ClipboardList />, title: "Provide Details", desc: "Submit clinic info & address" },
-        { icon: <CheckSquare />, title: "Verification", desc: "Quality & standards check" },
-        { icon: <Map />, title: "Allocation", desc: "Exclusive locality rights" },
-        { icon: <ShieldCheck />, title: "Standards", desc: "License & hygiene protocols" },
-        { icon: <CreditCard />, title: "Reservation", desc: "Secure with ₹1000 payment" },
+        {
+            icon: <FileText className="w-6 h-6 text-sky-500" />,
+            title: "Application",
+            desc: "Submit your clinic details and credentials for initial review."
+        },
+        {
+            icon: <UserCheck className="w-6 h-6 text-sky-500" />,
+            title: "Verification",
+            desc: "Our team verifies your standards and operational readiness."
+        },
+        {
+            icon: <ShieldCheck className="w-6 h-6 text-sky-500" />,
+            title: "Approval",
+            desc: "Get certified and granted exclusive locality rights."
+        },
+        {
+            icon: <CreditCard className="w-6 h-6 text-sky-500" />,
+            title: "Onboarding",
+            desc: "Complete the formalities and access our brand assets."
+        }
     ];
 
     return (
-        <section id="franchise" className="py-24 bg-gradient-to-br from-amber-50 to-orange-50 text-stone-900 relative overflow-hidden">
-            {/* Abstract Background */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-40 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        <section id="join" className="py-24 bg-slate-900 text-white relative overflow-hidden">
+            {/* Background Gradients */}
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-sky-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
 
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 font-serif text-stone-900">Join the Network</h2>
-                    <p className="text-stone-500 text-xl max-w-2xl mx-auto font-light">Become a part of India's fastest growing dental chain. Simpler than you think.</p>
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="text-center mb-20 max-w-3xl mx-auto">
+                    <span className="text-sky-500 font-bold uppercase tracking-widest text-xs mb-4 block">Expansion</span>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading">
+                        Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">Big Dental</span> Network
+                    </h2>
+                    <p className="text-slate-400 text-lg font-light leading-relaxed">
+                        Be part of India's fastest-growing dental chain. Leverage our brand, technology, and marketing to scale your practice.
+                    </p>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+                    {/* Connecting Line (Desktop) */}
+                    <div className="hidden lg:block absolute top-12 left-10 right-10 h-0.5 bg-slate-800 -z-10"></div>
+
                     {steps.map((step, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -10 }}
-                            className="bg-white border border-stone-100 p-8 rounded-2xl w-full md:w-60 text-center hover:shadow-xl hover:border-amber-200 transition-all duration-300 shadow-sm"
+                            transition={{ delay: index * 0.15 }}
+                            className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition-colors group"
                         >
-                            <div className="w-14 h-14 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-6 text-amber-500">
+                            <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 shadow-inner ring-1 ring-white/10 group-hover:bg-sky-500/10 group-hover:ring-sky-500/30 transition-all">
                                 {step.icon}
                             </div>
-                            <h3 className="font-bold text-lg mb-2 text-stone-900 font-serif">{step.title}</h3>
-                            <p className="text-stone-500 text-sm leading-relaxed">{step.desc}</p>
+                            <h3 className="text-xl font-bold mb-3 font-heading text-slate-100">{step.title}</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed">
+                                {step.desc}
+                            </p>
                         </motion.div>
                     ))}
                 </div>
 
-                <div className="mt-20 text-center">
-                    <motion.button
+                <div className="text-center mt-16">
+                    <motion.a
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-stone-900 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-amber-600 transition-colors"
+                        href="/franchise"
+                        className="inline-flex items-center gap-2 bg-sky-600 text-white px-10 py-4 rounded-full font-bold shadow-lg shadow-sky-900/40 hover:bg-sky-500 transition-all"
                     >
                         Apply for Franchise
-                    </motion.button>
+                        <ArrowRight className="w-5 h-5" />
+                    </motion.a>
                 </div>
             </div>
         </section>
