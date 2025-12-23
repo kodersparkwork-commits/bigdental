@@ -9,6 +9,7 @@ import FranchisePage from './components/FranchisePage';
 import About from './components/About';
 import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
+import PartnerRegistration from './components/PartnerRegistration';
 
 // UI Components
 import Loader from './components/ui/Loader';
@@ -51,6 +52,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <ContactPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/partner-registration"
+          element={
+            <PageTransition>
+              <PartnerRegistration />
             </PageTransition>
           }
         />

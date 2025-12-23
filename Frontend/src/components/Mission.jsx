@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 const Mission = () => {
+    const navigate = useNavigate();
     return (
         <section id="mission" className="py-24 bg-white relative overflow-hidden">
             {/* Background Blob */}
@@ -43,7 +44,7 @@ const Mission = () => {
                         </div>
 
                         <div className="flex justify-center">
-                            <button className="bg-slate-900 text-white px-8 py-4 rounded-full font-semibold shadow-xl shadow-slate-900/10 hover:bg-sky-600 hover:shadow-sky-500/20 transition-all flex items-center gap-2 group">
+                            <button className="bg-slate-900 text-white px-8 py-4 rounded-full font-semibold shadow-xl shadow-slate-900/10 hover:bg-sky-600 hover:shadow-sky-500/20 transition-all flex items-center gap-2 group" onClick={() => navigate('/about')}>
                                 Learn More About Us
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>

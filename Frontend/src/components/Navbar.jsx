@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -40,7 +40,6 @@ const Navbar = () => {
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xl font-bold text-slate-900 leading-none tracking-tight">Big<span className="text-sky-600">Dental</span></span>
-                            <span className="text-[10px] uppercase tracking-widest text-slate-500 font-medium">Medical Center</span>
                         </div>
                     </Link>
 
@@ -67,17 +66,18 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {/* CTA Button */}
+                    {/* Search Bar */}
                     <div className="hidden lg:flex items-center gap-4">
-                        <a
-                            href="https://wa.me/919618035653"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-slate-900 text-white px-6 py-3 rounded-full font-semibold text-sm shadow-xl shadow-slate-900/10 hover:bg-sky-600 hover:shadow-sky-500/20 transition-all duration-300 flex items-center gap-2 group"
-                        >
-                            Book Appointment
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </a>
+                        <div className="relative group">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <Search className="h-4 w-4 text-slate-400 group-focus-within:text-sky-500 transition-colors" />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Search here..."
+                                className="pl-10 pr-4 py-2.5 rounded-full bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 w-64 transition-all shadow-sm hover:shadow-md"
+                            />
+                        </div>
                     </div>
 
                     {/* Mobile Menu Toggle */}

@@ -71,7 +71,7 @@ const Join = () => {
                     <motion.a
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        href="/franchise"
+                        href="/partner-registration"
                         className="inline-flex items-center gap-2 bg-sky-600 text-white px-10 py-4 rounded-full font-bold shadow-lg shadow-sky-900/40 hover:bg-sky-500 transition-all"
                     >
                         Apply for Franchise
