@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Upload, Calendar, ChevronDown, Check, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import L from 'leaflet';
+
+// Fix for default marker icon in React-Leaflet
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const PartnerRegistration = () => {
+    const navigate = useNavigate();
     const [showTerms, setShowTerms] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
@@ -25,10 +42,10 @@ const PartnerRegistration = () => {
         loginEmail: '',
         password: '',
         councilName: '',
-        councilNumber: '',
-        specialization: '',
-        discountAmount: '',
-        discountServices: [],
+        latitude: '',
+        longitude: '',
+        councilCertificate: null,
+        clinicPhotos: [],
         acceptedTerms: false
     });
 
@@ -43,17 +60,97 @@ const PartnerRegistration = () => {
     ];
 
     const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
+        const { name, value, type, checked, files } = e.target;
+        if (type === 'file') {
+            if (name === 'clinicPhotos') {
+                setFormData(prev => ({ ...prev, [name]: Array.from(files) }));
+            } else {
+                setFormData(prev => ({ ...prev, [name]: files[0] }));
+            }
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: type === 'checkbox' ? checked : value
+            }));
+        }
     };
 
-    const handleSubmit = (e) => {
+    const LocationMarker = () => {
+        const map = useMapEvents({
+            click(e) {
+                setFormData(prev => ({
+                    ...prev,
+                    latitude: e.latlng.lat,
+                    longitude: e.latlng.lng
+                }));
+            },
+        });
+
+        useEffect(() => {
+            if (!formData.latitude && !formData.longitude && navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        setFormData(prev => ({
+                            ...prev,
+                            latitude,
+                            longitude
+                        }));
+                        map.flyTo([latitude, longitude], 13);
+                    },
+                    (error) => {
+                        console.error("Error getting location detected:", error);
+                    }
+                );
+            }
+        }, [map]);
+
+        return formData.latitude && formData.longitude ? (
+            <Marker position={[formData.latitude, formData.longitude]} />
+        ) : null;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
-        // Add API call logic here
+
+        const lat = parseFloat(formData.latitude);
+        const lng = parseFloat(formData.longitude);
+
+        if (isNaN(lat) || isNaN(lng)) {
+            alert("Please detect your clinic location using the map.");
+            return;
+        }
+
+        const data = new FormData();
+        Object.keys(formData).forEach(key => {
+            if (key === 'clinicPhotos') {
+                formData.clinicPhotos.forEach(file => data.append('clinicPhotos', file));
+            } else if (key === 'councilCertificate') {
+                if (formData.councilCertificate) data.append('councilCertificate', formData.councilCertificate);
+            } else {
+                data.append(key, formData[key]);
+            }
+        });
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/register', {
+                method: 'POST',
+                body: data
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('Registration Successful! Please Login.');
+                console.log(result);
+                navigate('/');
+            } else {
+                alert(result.message || 'Registration Failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
     };
 
     return (
@@ -96,6 +193,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="text"
                                         name="fullName"
+                                        value={formData.fullName}
+                                        onChange={handleInputChange}
                                         placeholder="Responsible person / Doctor name"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -106,6 +205,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="number"
                                         name="age"
+                                        value={formData.age}
+                                        onChange={handleInputChange}
                                         placeholder="Age"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -116,6 +217,8 @@ const PartnerRegistration = () => {
                                     <div className="relative">
                                         <select
                                             name="sex"
+                                            value={formData.sex}
+                                            onChange={handleInputChange}
                                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
                                             required
                                         >
@@ -133,6 +236,8 @@ const PartnerRegistration = () => {
                                         <input
                                             type="date"
                                             name="dob"
+                                            value={formData.dob}
+                                            onChange={handleInputChange}
                                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                             required
                                         />
@@ -155,6 +260,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="text"
                                         name="clinicName"
+                                        value={formData.clinicName}
+                                        onChange={handleInputChange}
                                         placeholder="Clinic / Practice name"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -165,6 +272,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="text"
                                         name="address"
+                                        value={formData.address}
+                                        onChange={handleInputChange}
                                         placeholder="Full address"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -176,6 +285,8 @@ const PartnerRegistration = () => {
                                         <div className="relative">
                                             <select
                                                 name="state"
+                                                value={formData.state}
+                                                onChange={handleInputChange}
                                                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
                                                 required
                                             >
@@ -194,6 +305,8 @@ const PartnerRegistration = () => {
                                         <input
                                             type="text"
                                             name="district"
+                                            value={formData.district}
+                                            onChange={handleInputChange}
                                             placeholder="District"
                                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                             required
@@ -204,6 +317,8 @@ const PartnerRegistration = () => {
                                         <input
                                             type="text"
                                             name="pincode"
+                                            value={formData.pincode}
+                                            onChange={handleInputChange}
                                             placeholder="Pin / ZIP code"
                                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                             required
@@ -211,32 +326,80 @@ const PartnerRegistration = () => {
                                     </div>
                                 </div>
 
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-semibold text-slate-700">Clinic Location *</label>
+                                    <div className="h-[300px] w-full rounded-xl overflow-hidden border border-slate-200 z-0">
+                                        <MapContainer
+                                            center={[20.5937, 78.9629]}
+                                            zoom={5}
+                                            scrollWheelZoom={true}
+                                            style={{ height: '100%', width: '100%' }}
+                                        >
+                                            <TileLayer
+                                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                            />
+                                            <LocationMarker />
+                                        </MapContainer>
+                                    </div>
+
+                                    {(formData.latitude && formData.longitude) ? (
+                                        <span className="text-sm text-green-600 font-medium flex items-center gap-1 mt-2">
+                                            <Check className="w-4 h-4" /> Location Selected: {formData.latitude.toFixed(4)}, {formData.longitude.toFixed(4)}
+                                        </span>
+                                    ) : (
+                                        <span className="text-sm text-slate-500 mt-2 block">
+                                            Click on the map to pin your clinic location.
+                                        </span>
+                                    )}
+                                </div>
+
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-2">
                                         <label className="block text-sm font-semibold text-slate-700">Available Timings *</label>
                                         <div className="flex gap-4">
-                                            <select className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none">
-                                                <option>From</option>
-                                                <option>9:00 AM</option>
-                                                <option>10:00 AM</option>
+                                            <select
+                                                name="timingsFrom"
+                                                value={formData.timingsFrom}
+                                                onChange={handleInputChange}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
+                                            >
+                                                <option value="">From</option>
+                                                <option value="9:00 AM">9:00 AM</option>
+                                                <option value="10:00 AM">10:00 AM</option>
                                             </select>
-                                            <select className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none">
-                                                <option>To</option>
-                                                <option>5:00 PM</option>
-                                                <option>6:00 PM</option>
+                                            <select
+                                                name="timingsTo"
+                                                value={formData.timingsTo}
+                                                onChange={handleInputChange}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
+                                            >
+                                                <option value="">To</option>
+                                                <option value="5:00 PM">5:00 PM</option>
+                                                <option value="6:00 PM">6:00 PM</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
                                         <label className="block text-sm font-semibold text-slate-700">Available Days *</label>
                                         <div className="flex gap-4">
-                                            <select className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none">
-                                                <option>From</option>
-                                                <option>Monday</option>
+                                            <select
+                                                name="daysFrom"
+                                                value={formData.daysFrom}
+                                                onChange={handleInputChange}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
+                                            >
+                                                <option value="">From</option>
+                                                <option value="Monday">Monday</option>
                                             </select>
-                                            <select className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none">
-                                                <option>To</option>
-                                                <option>Saturday</option>
+                                            <select
+                                                name="daysTo"
+                                                value={formData.daysTo}
+                                                onChange={handleInputChange}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
+                                            >
+                                                <option value="">To</option>
+                                                <option value="Saturday">Saturday</option>
                                             </select>
                                         </div>
                                     </div>
@@ -247,6 +410,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="url"
                                         name="website"
+                                        value={formData.website}
+                                        onChange={handleInputChange}
                                         placeholder="https://"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                     />
@@ -267,6 +432,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="email"
                                         name="contactEmail"
+                                        value={formData.contactEmail}
+                                        onChange={handleInputChange}
                                         placeholder="contact@you.com"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -277,6 +444,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="tel"
                                         name="contactPhone"
+                                        value={formData.contactPhone}
+                                        onChange={handleInputChange}
                                         placeholder="Phone number"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -287,6 +456,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="email"
                                         name="loginEmail"
+                                        value={formData.loginEmail}
+                                        onChange={handleInputChange}
                                         placeholder="email@domain.com"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -297,6 +468,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="password"
                                         name="password"
+                                        value={formData.password}
+                                        onChange={handleInputChange}
                                         placeholder="Minimum 6 characters"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -318,6 +491,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="text"
                                         name="councilName"
+                                        value={formData.councilName}
+                                        onChange={handleInputChange}
                                         placeholder="Council or authority"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -328,6 +503,8 @@ const PartnerRegistration = () => {
                                     <input
                                         type="text"
                                         name="councilNumber"
+                                        value={formData.councilNumber}
+                                        onChange={handleInputChange}
                                         placeholder="Registration number"
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
                                         required
@@ -340,6 +517,8 @@ const PartnerRegistration = () => {
                                 <div className="relative">
                                     <select
                                         name="specialization"
+                                        value={formData.specialization}
+                                        onChange={handleInputChange}
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
                                         required
                                     >
@@ -363,61 +542,43 @@ const PartnerRegistration = () => {
                             <div className="space-y-6">
                                 <div className="space-y-2">
                                     <label className="block text-sm font-semibold text-slate-700">Council Certificate (Required)</label>
-                                    <div className="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer group">
+                                    <div className="relative border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer group">
                                         <div className="w-12 h-12 rounded-full bg-slate-100 mx-auto flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
                                             <Upload className="w-6 h-6 text-slate-400 group-hover:text-blue-600" />
                                         </div>
                                         <p className="text-slate-600 text-sm">Click to upload certificate</p>
+                                        <input
+                                            type="file"
+                                            name="councilCertificate"
+                                            onChange={handleInputChange}
+                                            className="absolute inset-0 opacity-0 cursor-pointer"
+                                            accept="image/*,application/pdf"
+                                        />
                                     </div>
+                                    {formData.councilCertificate && <p className="text-sm text-green-600 mt-2">{formData.councilCertificate.name}</p>}
                                 </div>
                                 <div className="space-y-2">
                                     <label className="block text-sm font-semibold text-slate-700">Clinic Photos (Required - you may upload multiple)</label>
-                                    <div className="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer group">
+                                    <div className="relative border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer group">
                                         <div className="w-12 h-12 rounded-full bg-slate-100 mx-auto flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
                                             <Upload className="w-6 h-6 text-slate-400 group-hover:text-blue-600" />
                                         </div>
                                         <p className="text-slate-600 text-sm">Click to upload available photos</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Discount Information */}
-                        <section>
-                            <div className="flex items-center gap-3 mb-8">
-                                <div className="w-1.5 h-8 bg-green-600 rounded-full"></div>
-                                <h2 className="text-2xl font-bold text-slate-800 font-heading">Discount Information</h2>
-                            </div>
-
-                            <div className="space-y-6">
-                                <div className="space-y-2">
-                                    <label className="block text-sm font-semibold text-slate-700">Discount Amount *</label>
-                                    <input
-                                        type="text"
-                                        name="discountAmount"
-                                        placeholder="e.g., 10% off, ₹500 off, etc."
-                                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
-                                        required
-                                    />
-                                    <p className="text-xs text-slate-400">Specify the discount you are willing to provide to MEDI COST SAVER members</p>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="block text-sm font-semibold text-slate-700">Services/Procedures for Discount *</label>
-                                    <div className="flex gap-4">
                                         <input
-                                            type="text"
-                                            name="discountService"
-                                            placeholder="e.g., Consultation, Blood Test, X-Ray, etc."
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all bg-slate-50 focus:bg-white"
+                                            type="file"
+                                            name="clinicPhotos"
+                                            onChange={handleInputChange}
+                                            className="absolute inset-0 opacity-0 cursor-pointer"
+                                            multiple
+                                            accept="image/*"
                                         />
-                                        <button type="button" className="bg-green-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-green-700 transition-colors">
-                                            Add
-                                        </button>
                                     </div>
-                                    <p className="text-xs text-slate-400">Add services/procedures you want to offer discount on. Press Enter or click Add to include them.</p>
+                                    {formData.clinicPhotos.length > 0 && <p className="text-sm text-green-600 mt-2">{formData.clinicPhotos.length} files selected</p>}
                                 </div>
                             </div>
                         </section>
+
+
 
                         {/* Terms */}
                         <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">

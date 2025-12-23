@@ -47,7 +47,7 @@ const Hero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <motion.a
-                            href="/contact-us"
+                            href="/find-dentist"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="bg-sky-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-sky-500/30 hover:bg-sky-600 hover:shadow-xl transition-all flex items-center justify-center gap-2 group"
@@ -57,7 +57,7 @@ const Hero = () => {
                         </motion.a>
 
                         <motion.a
-                            href="#treatments"
+                            href="/find-dentist"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-slate-900 transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
