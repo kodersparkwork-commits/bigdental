@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ShieldAlert, TrendingUp, CheckCircle2, Star, ArrowRight, Wallet, Users, Globe, Building2 } from 'lucide-react';
 import shark from '../assets/shark.png';
 import goldenEgg from '../assets/golden_egg.png';
-import WhyChooseUs from './WhyChooseUs';
+
 import Join from './Join';
 
 const FranchisePage = () => {
@@ -73,8 +73,7 @@ const FranchisePage = () => {
                 </div>
             </section>
 
-            {/* Why Choose Us Section */}
-            <WhyChooseUs />
+
 
             {/* How Does It Work Section */}
             <section className="py-24 bg-white border-b border-slate-100">

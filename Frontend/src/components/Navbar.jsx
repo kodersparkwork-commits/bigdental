@@ -80,6 +80,21 @@ const Navbar = () => {
                         </div>
                     </div>
 
+
+                    {/* Mobile Search Bar */}
+                    <div className="flex lg:hidden items-center flex-1 justify-center px-4">
+                        <div className="relative group w-full max-w-[200px] md:max-w-xs">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <Search className="h-4 w-4 text-slate-400 group-focus-within:text-sky-500 transition-colors" />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                className="w-full pl-9 pr-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all shadow-sm hover:shadow-md"
+                            />
+                        </div>
+                    </div>
+
                     {/* Mobile Menu Toggle */}
                     <button
                         className="lg:hidden p-2 text-slate-900 bg-white rounded-lg shadow-sm"
@@ -121,12 +136,7 @@ const Navbar = () => {
                                     </a>
                                 )
                             ))}
-                            <a
-                                href="https://wa.me/919032018887"
-                                className="block w-full text-center bg-sky-600 text-white p-4 rounded-xl font-bold shadow-lg shadow-sky-500/20 mt-4"
-                            >
-                                Book Appointment
-                            </a>
+
                         </div>
                     </motion.div>
                 )}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star, CheckCircle, Play, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight, Star, CheckCircle, Play, ShieldCheck, Users, MapPin, Stethoscope } from 'lucide-react';
 
 const Hero = () => {
     return (
@@ -47,23 +47,24 @@ const Hero = () => {
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <motion.a
-                            href="#contact"
+                            href="/contact-us"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="bg-sky-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-sky-500/30 hover:bg-sky-600 hover:shadow-xl transition-all flex items-center justify-center gap-2 group"
                         >
-                            Book Consultation
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            <MapPin className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                            Find Dentist near you
                         </motion.a>
 
-                        <motion.button
+                        <motion.a
+                            href="#treatments"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-slate-900 transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
                         >
-                            <Play className="w-5 h-5 fill-current" />
-                            Watch Video
-                        </motion.button>
+                            <Stethoscope className="w-5 h-5" />
+                            Find by Treatment
+                        </motion.a>
                     </div>
 
                     <div className="mt-16 flex flex-wrap justify-center gap-x-8 gap-y-4 text-slate-300 font-medium">

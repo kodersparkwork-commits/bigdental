@@ -4,6 +4,7 @@ import Features from './Features';
 import Mission from './Mission';
 import Treatments from './Treatments';
 
+import WhyChooseUs from './WhyChooseUs';
 import HowItWorks from './HowItWorks';
 
 
@@ -13,8 +14,9 @@ const Home = () => {
             <Hero />
             <Mission />
             <Features />
-            <Treatments />
 
+            <Treatments />
+            <WhyChooseUs />
             <HowItWorks />
 
         </>
