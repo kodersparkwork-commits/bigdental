@@ -32,7 +32,7 @@ app.use(express.json());
 // Connect to Database
 connectDB();
 
-// Routes
+// Route
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/clinics', require('./routes/clinicRoutes'));
 

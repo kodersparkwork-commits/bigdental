@@ -16,7 +16,7 @@ const AdminDashboard = () => {
     const fetchClinics = async () => {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:5000/api/clinics', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/clinics`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await res.json();
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
     const handleApprove = async (id) => {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:5000/api/clinics/${id}/approve`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/clinics/${id}/approve`, {
                 method: 'PUT',
                 headers: { Authorization: `Bearer ${token}` }
             });

@@ -49,7 +49,7 @@ const FindDentistPage = () => {
         setLoading(true);
         setError(null);
         try {
-            let url = `http://localhost:5000/api/clinics/nearest?`;
+            let url = `${import.meta.env.VITE_API_URL}/api/clinics/nearest?`;
 
             if (search) {
                 url += `search=${encodeURIComponent(search)}`;

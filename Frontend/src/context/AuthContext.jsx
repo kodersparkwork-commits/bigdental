@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    const res = await fetch('http://localhost:5000/api/auth/me', {
+                    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
-        const res = await fetch('http://localhost:5000/api/auth/login', {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

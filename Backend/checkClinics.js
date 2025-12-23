@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Clinic = require('./Backend/models/Clinic');
+const Clinic = require('./models/Clinic');
 
 dotenv.config({ path: './Backend/.env' });
 
