@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Star, CheckCircle, Play, ShieldCheck, Users, MapPin, Stethoscope } from 'lucide-react';
-
+import smile from '../assets/smiling.png';
 const Hero = () => {
     return (
         <section className="relative min-h-screen overflow-hidden flex items-center py-20">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <img
-                    src="http://bigdental.org/wp-content/uploads/2024/05/dental-1.jpg"
+                    src={smile}
                     alt="Smiling Patient"
                     className="w-full h-full object-cover"
                 />

@@ -12,7 +12,7 @@ const app = express();
 const allowedOrigins = [
     'https://bigdental.vercel.app',
     'http://localhost:5173',
-    'http://localhost:3000'
+    'https://bigdental.org'
 ];
 
 app.use(cors({
