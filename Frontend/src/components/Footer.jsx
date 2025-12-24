@@ -1,5 +1,6 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import logo from '../assets/big_dental_logo.png';
 
 const Footer = () => {
     return (
@@ -10,9 +11,7 @@ const Footer = () => {
                     {/* Brand Column */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gradient-to-br from-sky-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-sky-900/20">
-                                B
-                            </div>
+                            <img src={logo} alt="Big Dental" className="h-12 w-auto object-contain bg-white rounded-lg p-1" />
                             <div>
                                 <span className="text-2xl font-bold font-heading text-white tracking-tight">Big<span className="text-sky-500">Dental</span></span>
                             </div>

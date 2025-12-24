@@ -1,8 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Send, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, Clock, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 
 const ContactPage = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+    });
+    const [result, setResult] = useState("");
+    const [status, setStatus] = useState("idle"); // idle, loading, success, error
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("loading");
+        setResult("Sending...");
+
+        const formDataToSend = new FormData();
+        formDataToSend.append("access_key", "630790aa-e465-4279-869d-126d6c1d1261");
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("email", formData.email);
+        formDataToSend.append("subject", formData.subject);
+        formDataToSend.append("message", formData.message);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formDataToSend
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setResult("Form Submitted Successfully");
+                setStatus("success");
+                setFormData({ name: "", email: "", subject: "", message: "" }); // Reset form
+            } else {
+                console.error("Error", data);
+                setResult(data.message);
+                setStatus("error");
+            }
+        } catch (error) {
+            console.error("Error", error);
+            setResult("Something went wrong! Please try again later.");
+            setStatus("error");
+        }
+    };
+
     return (
         <div className="bg-slate-50 min-h-screen pt-24 pb-12">
             <div className="container mx-auto px-6">
@@ -105,12 +154,16 @@ const ContactPage = () => {
                         <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl shadow-slate-200/50 border border-slate-100">
                             <h3 className="text-2xl font-bold text-slate-900 mb-8 font-heading">Send us a Message</h3>
 
-                            <form className="space-y-6">
+                            <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label className="block text-sm font-bold text-slate-700 mb-2">Your Name *</label>
                                         <input
                                             type="text"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            required
                                             placeholder="Dr. Jane Doe"
                                             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
                                         />
@@ -119,6 +172,10 @@ const ContactPage = () => {
                                         <label className="block text-sm font-bold text-slate-700 mb-2">Email Address *</label>
                                         <input
                                             type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            required
                                             placeholder="you@example.com"
                                             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
                                         />
@@ -129,6 +186,10 @@ const ContactPage = () => {
                                     <label className="block text-sm font-bold text-slate-700 mb-2">Subject *</label>
                                     <input
                                         type="text"
+                                        name="subject"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        required
                                         placeholder="Implantology fellowship"
                                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
                                     />
@@ -138,17 +199,46 @@ const ContactPage = () => {
                                     <label className="block text-sm font-bold text-slate-700 mb-2">Message *</label>
                                     <textarea
                                         rows="6"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        required
                                         placeholder="Tell us how we can support your dental journey..."
                                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors resize-none"
                                     ></textarea>
                                 </div>
 
+                                {/* Status Messages */}
+                                {status === 'success' && (
+                                    <div className="flex items-center gap-2 p-4 bg-green-50 text-green-700 rounded-xl border border-green-200">
+                                        <CheckCircle className="w-5 h-5" />
+                                        <p>{result}</p>
+                                    </div>
+                                )}
+
+                                {status === 'error' && (
+                                    <div className="flex items-center gap-2 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200">
+                                        <AlertCircle className="w-5 h-5" />
+                                        <p>{result}</p>
+                                    </div>
+                                )}
+
                                 <button
                                     type="submit"
-                                    className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-sky-500/30 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
+                                    disabled={status === 'loading'}
+                                    className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-sky-500/30 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
-                                    <Send className="w-5 h-5" />
-                                    Send Message
+                                    {status === 'loading' ? (
+                                        <>
+                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                            Sending...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send className="w-5 h-5" />
+                                            Send Message
+                                        </>
+                                    )}
                                 </button>
                             </form>
                         </div>

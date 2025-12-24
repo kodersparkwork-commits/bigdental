@@ -6,79 +6,81 @@ const WhyChooseUs = () => {
     const features = [
         {
             icon: <Sparkles className="w-8 h-8 text-sky-500" />,
-            title: "Modern practices",
-            desc: "State-of-the-art dental technologies and modern methodologies."
+            title: "Modern dental practices",
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
+        },
+        {
+            icon: <Wallet className="w-8 h-8 text-sky-500" />,
+            title: "Affordable price, At least 40% less",
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
         },
         {
             icon: <MapPin className="w-8 h-8 text-sky-500" />,
-            title: "3000+ Clinics",
-            desc: "A vast network of clinics spread across India for easy access."
+            title: "3000 + Clinics spread across India",
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
+        },
+        {
+            icon: <CreditCard className="w-8 h-8 text-sky-500" />,
+            title: "Flexible Payment options",
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
         },
         {
             icon: <Users className="w-8 h-8 text-sky-500" />,
             title: "10,000 Doctors",
-            desc: "A massive team of experienced dental professionals."
-        },
-        {
-            icon: <ShieldCheck className="w-8 h-8 text-sky-500" />,
-            title: "Hygienic protocols",
-            desc: "Strict adherence to sterilization and hygiene standards."
-        },
-        {
-            icon: <Wallet className="w-8 h-8 text-sky-500" />,
-            title: "Affordable price",
-            desc: "High quality care at least 40% less than market rates."
-        },
-        {
-            icon: <CreditCard className="w-8 h-8 text-sky-500" />,
-            title: "Flexible Payment",
-            desc: "Easy payment options to suit your financial needs."
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
         },
         {
             icon: <Banknote className="w-8 h-8 text-sky-500" />,
-            title: "Interest Free Finance",
-            desc: "0% interest financing options for dental procedures."
+            title: "Interest Free Finance for procedures",
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
+        },
+        {
+            icon: <ShieldCheck className="w-8 h-8 text-sky-500" />,
+            title: "Strictly Hygienic protocols",
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
         },
         {
             icon: <Clock className="w-8 h-8 text-sky-500" />,
             title: "No waiting period",
-            desc: "Immediate appointments and prompt treatment commencement."
+            desc: "Your content goes here. Edit or remove this text inline or in the module Content settings."
         }
     ];
 
     return (
-        <section className="py-24 bg-slate-50">
+        <section className="py-20 bg-slate-50">
             <div className="container mx-auto px-6">
-                <div className="text-center mb-16 max-w-2xl mx-auto">
-                    <span className="text-sky-600 font-semibold uppercase tracking-wider text-sm mb-3 block">Why Choose Big Dental</span>
-                    <h2 className="text-4xl font-bold text-slate-900 mb-6 font-heading">
-                        Excellence in Every <span className="text-sky-600">Detail</span>
+                <div className="text-center mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 font-heading">
+                        Why you choose <span className="text-sky-600">Big Dental clinics?</span>
                     </h2>
-                    <p className="text-lg text-slate-600 font-light leading-relaxed">
-                        We blend clinical expertise with a warm, welcoming environment to redefine your dental experience.
-                    </p>
+                    <div className="w-24 h-1 bg-sky-500 mx-auto rounded-full"></div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
-                            whileHover={{ y: -10 }}
-                            className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-300 group"
+                            transition={{ delay: index * 0.1 }}
+                            className="flex gap-5 group bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:border-sky-100 transition-all duration-300"
                         >
-                            <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:bg-sky-50 transition-colors duration-300">
-                                {feature.icon}
+                            <div className="flex-shrink-0">
+                                <div className="w-14 h-14 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center group-hover:bg-sky-600 transition-colors duration-300">
+                                    <div className="text-sky-600 group-hover:text-white transition-colors duration-300">
+                                        {React.cloneElement(feature.icon, { className: "w-7 h-7" })}
+                                    </div>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3 font-heading group-hover:text-sky-600 transition-colors">
-                                {feature.title}
-                            </h3>
-                            <p className="text-slate-600 leading-relaxed text-sm">
-                                {feature.desc}
-                            </p>
+                            <div>
+                                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-sky-600 transition-colors">
+                                    {feature.title}
+                                </h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    {feature.desc}
+                                </p>
+                            </div>
                         </motion.div>
                     ))}
                 </div>

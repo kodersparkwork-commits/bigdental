@@ -5,9 +5,9 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Mission from './components/Mission';
 import Treatments from './components/Treatments';
+import WhyChooseUs from './components/WhyChooseUs';
 import About from './components/About';
 import HowItWorks from './components/HowItWorks';
-import Join from './components/Join';
 import Footer from './components/Footer';
 import PartnerRegistration from './components/PartnerRegistration';
 import FranchisePage from './components/FranchisePage';
@@ -47,7 +47,6 @@ const AppContent = () => {
   const treatmentsRef = useRef(null);
   const aboutRef = useRef(null);
   const howItWorksRef = useRef(null);
-  const joinRef = useRef(null);
   const footerRef = useRef(null);
 
   const scrollToSection = (ref) => {
@@ -60,7 +59,7 @@ const AppContent = () => {
       {!isRegistrationPage && (
         <Navbar
           scrollToSection={location.pathname === '/' ? scrollToSection : () => { }}
-          refs={{ heroRef, featuresRef, missionRef, treatmentsRef, aboutRef, howItWorksRef, joinRef, footerRef }}
+          refs={{ heroRef, featuresRef, missionRef, treatmentsRef, aboutRef, howItWorksRef, footerRef }}
         />
       )}
 
@@ -71,9 +70,9 @@ const AppContent = () => {
             <div ref={featuresRef}><Features /></div>
             <div ref={missionRef}><Mission /></div>
             <div ref={treatmentsRef}><Treatments /></div>
+            <WhyChooseUs />
             {/* About moved to separate page */}
             <div ref={howItWorksRef}><HowItWorks /></div>
-            <div ref={joinRef}><Join /></div>
           </>
         } />
         <Route path="/about" element={<About />} />

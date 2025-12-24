@@ -4,6 +4,8 @@ import { Menu, X, ArrowRight, Search, User, LogOut, LayoutDashboard } from 'luci
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+import logo from '../assets/big_dental_logo.png';
+
 const Navbar = ({ scrollToSection, refs }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -51,9 +53,7 @@ const Navbar = ({ scrollToSection, refs }) => {
                 <div className="container mx-auto px-6 flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-sky-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
-                            B
-                        </div>
+                        <img src={logo} alt="Big Dental" className="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
                         <div className="flex flex-col">
                             <span className="text-xl font-bold text-slate-900 leading-none tracking-tight">Big<span className="text-sky-600">Dental</span></span>
                         </div>
@@ -104,7 +104,7 @@ const Navbar = ({ scrollToSection, refs }) => {
                         ) : (
                             <div className="flex items-center gap-3">
                                 <Link to="/login" className="px-6 py-2.5 rounded-full text-slate-700 font-bold text-sm hover:bg-slate-100 transition-all">
-                                    Login
+                                    Dentist Login
                                 </Link>
                             </div>
                         )}
